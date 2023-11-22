@@ -13,7 +13,7 @@ public class Matricula {
     private String password;
     private String curso;
     private String observacao;
-    private int ativo;
+    private String ativo;
 
     public int getId() {
         return id;
@@ -92,16 +92,17 @@ public class Matricula {
         this.observacao = observacao;
     }
 
-    private int getAtivo() {
+    public String getAtivo() {
         return ativo;
     }
-    private void setAtivo(int ativo) {
-        this.ativo = ativo;
+
+    public void setAtivo(String ativo) {
+        this.ativo= ativo;
     }
 
     @Override
 	public String toString() {
-		return String.format("ID:%d\n Nome:%s\n Data de Nascimento:%s\n email:%s\n Endereço:%s\n CEP:%s\n Telefone:%s\n Usuário:%s\n Senha:%s\n Curso:%s\n Observação:%s\n", id, nome, dataNascimento, email, endereco, cep, telefone, user, password, curso, observacao);
+		return String.format("ID:%d\n Nome:%s\n Data de Nascimento:%s\n email:%s\n Endereço:%s\n CEP:%s\n Telefone:%s\n Usuário:%s\n Senha:%s\n Curso:%s\n Observação:%s\n Ativo:", id, nome, dataNascimento, email, endereco, cep, telefone, user, password, curso, observacao, ativo);
 	}
 
     @Override

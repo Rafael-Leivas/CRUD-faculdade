@@ -18,6 +18,7 @@ public class TodoApp {
         matricula.setObservacao("Sou bom de mais");
 
         MatriculaStore.inserir(matricula);
+        matricula = new Matricula();
 
         matricula.setNome("FILIPINHO");
         matricula.setDataNascimento("19/04/1990");
