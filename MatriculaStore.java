@@ -9,8 +9,11 @@ import javax.swing.plaf.nimbus.State;
 
 public class MatriculaStore {
 
+    //Comando para rodar
+    //java -cp ".;./mysql-connector-j-8.2.0.jar" TodoApp
+
     public static void inserir(Matricula matricula) {
-        String query = "INSERT INTO matricula (nome, dataNascimento, email, endereco, cep, telefone, user, password, curso, observacao, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO matricula (nome, anosCompletos, email, endereco, cep, telefone, usuario, senha, curso, observacao, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Connection conn = null;
         PreparedStatement  stmt = null;
@@ -22,7 +25,7 @@ public class MatriculaStore {
             stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, matricula.getNome());
-            stmt.setString(2, matricula.getDataNascimento());
+            stmt.setInt(2, matricula.getAnosCompletos());
             stmt.setString(3, matricula.getEmail());
             stmt.setString(4, matricula.getEndereco());
             stmt.setString(5, matricula.getCep());
@@ -31,7 +34,7 @@ public class MatriculaStore {
             stmt.setString(8, matricula.getPassword());
             stmt.setString(9, matricula.getCurso());
             stmt.setString(10, matricula.getObservacao());
-            stmt.setString(11, matricula.getAtivo());
+            stmt.setBoolean(11, matricula.getAtivo());
             stmt.execute();
 
             rs = stmt.getGeneratedKeys();
@@ -44,7 +47,7 @@ public class MatriculaStore {
     }
 
     public static void editar(Matricula matricula) {
-        String query = "UPDATE matricula SET nome = ?, dataNascimento = ?, email = ?, endereco = ?, cep = ?, telefone = ?, user = ?, password = ?, curso = ?, observacao = ?, ativo = ? WHERE id = ?";
+        String query = "UPDATE matricula SET nome = ?, anosCompletos = ?, email = ?, endereco = ?, cep = ?, telefone = ?, usuario = ?, senha = ?, curso = ?, observacao = ?, ativo = ? WHERE id = ?";
     
         Connection conn = null;
         PreparedStatement  stmt = null;
@@ -55,7 +58,7 @@ public class MatriculaStore {
             stmt = conn.prepareStatement(query);
             stmt.setInt(1, matricula.getId());
             stmt.setString(2, matricula.getNome());
-            stmt.setString(3, matricula.getDataNascimento());
+            stmt.setInt(3, matricula.getAnosCompletos());
             stmt.setString(4, matricula.getEmail());
             stmt.setString(5, matricula.getEndereco());
             stmt.setString(6, matricula.getCep());
@@ -64,7 +67,7 @@ public class MatriculaStore {
             stmt.setString(9, matricula.getPassword());
             stmt.setString(10, matricula.getCurso());
             stmt.setString(11, matricula.getObservacao());
-            stmt.setString(12, matricula.getAtivo());
+            stmt.setBoolean(12, matricula.getAtivo());
             stmt.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,7 +94,7 @@ public class MatriculaStore {
     public static ArrayList<Matricula> listar() {
         ArrayList<Matricula> matriculas = new ArrayList<>();
 
-        String query = "SELECT id, nome, dataNascimento, email, endereco, cep, telefone, user, password,curso,observacao,ativo FROM matricula";
+        String query = "SELECT id, nome, anosCompletos, email, endereco, cep, telefone, usuario, senha,curso,observacao,ativo FROM matricula";
 
         Connection conn = null;
         Statement stmt = null;
@@ -108,16 +111,16 @@ public class MatriculaStore {
                 Matricula matricula = new Matricula();
                 matricula.setId(rs.getInt("id"));
                 matricula.setNome(rs.getString("nome"));
-                matricula.setDataNascimento(rs.getString("dataNascimento"));
+                matricula.setAnosCompletos(rs.getInt("anosCompletos"));
                 matricula.setEmail(rs.getString("email"));
                 matricula.setEndereco(rs.getString("endereco"));
                 matricula.setCep(rs.getString("cep"));
                 matricula.setTelefone(rs.getString("telefone"));
-                matricula.setUser(rs.getString("user"));
-                matricula.setPassword(rs.getString("password"));
+                matricula.setUser(rs.getString("usuario"));
+                matricula.setPassword(rs.getString("senha"));
                 matricula.setCurso(rs.getString("curso"));
                 matricula.setObservacao(rs.getString("observacao"));
-                matricula.setAtivo(rs.getString("ativo"));
+                matricula.setAtivo(rs.getBoolean("ativo"));
                 matriculas.add(matricula);
             }
         } catch (Exception e) {

@@ -4,7 +4,7 @@ public class Matricula {
     
     private int id;
     private String nome;
-    private String dataNascimento;
+    private int anosCompletos;
     private String email;
     private String endereco;
     private String cep;
@@ -13,7 +13,7 @@ public class Matricula {
     private String password;
     private String curso;
     private String observacao;
-    private String ativo;
+    private boolean ativo;
 
     public int getId() {
         return id;
@@ -29,11 +29,11 @@ public class Matricula {
         this.nome = nome;
     }
 
-    public String getDataNascimento() {
-        return dataNascimento;
+    public int getAnosCompletos() {
+        return anosCompletos;
     }
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setAnosCompletos(int anosCompletos) {
+        this.anosCompletos = anosCompletos;
     }
 
     public String getEmail() {
@@ -92,17 +92,17 @@ public class Matricula {
         this.observacao = observacao;
     }
 
-    public String getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(String ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo= ativo;
     }
 
     @Override
 	public String toString() {
-		return String.format("ID:%d\n Nome:%s\n Data de Nascimento:%s\n email:%s\n Endereço:%s\n CEP:%s\n Telefone:%s\n Usuário:%s\n Senha:%s\n Curso:%s\n Observação:%s\n Ativo:", id, nome, dataNascimento, email, endereco, cep, telefone, user, password, curso, observacao, ativo);
+		return String.format("ID:%d\n Nome:%s\n Seu ano:%d\n email:%s\n Endereço:%s\n CEP:%s\n Telefone:%s\n Usuário:%s\n Senha:%s\n Curso:%s\n Observação:%s\n Ativo:", id, nome, anosCompletos, email, endereco, cep, telefone, user, password, curso, observacao, ativo);
 	}
 
     @Override

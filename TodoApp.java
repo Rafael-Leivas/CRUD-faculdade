@@ -7,7 +7,7 @@ public class TodoApp {
         Matricula matricula = new Matricula(); // Criando um objeto Matricula
 
         matricula.setNome("João da Silva");
-        matricula.setDataNascimento("19/04/1990");
+        matricula.setAnosCompletos(2000);
         matricula.setEmail("joao@example.com");
         matricula.setEndereco("Rua da Perdição, 123");
         matricula.setCep("12345678"); 
@@ -16,12 +16,13 @@ public class TodoApp {
         matricula.setPassword("senha123");
         matricula.setCurso("ADS");
         matricula.setObservacao("Sou bom de mais");
+        matricula.setAtivo(true);
 
         MatriculaStore.inserir(matricula);
         matricula = new Matricula();
 
         matricula.setNome("FILIPINHO");
-        matricula.setDataNascimento("19/04/1990");
+        matricula.setAnosCompletos(1990);
         matricula.setEmail("FILIPINHO@example.com");
         matricula.setEndereco("Rua da Perdição, 123");
         matricula.setCep("12345678"); 
@@ -30,6 +31,7 @@ public class TodoApp {
         matricula.setPassword("senha123");
         matricula.setCurso("ADS");
         matricula.setObservacao("Sou bom de mais");
+        matricula.setAtivo(false);
 
         MatriculaStore.inserir(matricula);
 
