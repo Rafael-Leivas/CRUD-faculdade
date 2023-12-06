@@ -14,6 +14,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -62,7 +63,6 @@ public class MatriculaFormPanel extends JPanel{
                     telefoneTxt.setText("");
                     userTxt.setText("");
                     passwordTxt.setText("");
-                    cursoTxt.setText("");
                     observacaoTxt.setText("");
                     ativoCheckBox.setSelected(false);
                 } else {
@@ -75,7 +75,6 @@ public class MatriculaFormPanel extends JPanel{
                     telefoneTxt.setText(matricula.getTelefone());
                     userTxt.setText(matricula.getUsuario());
                     passwordTxt.setText(matricula.getSenha());
-                    cursoTxt.setText(matricula.getCurso());
                     observacaoTxt.setText(matricula.getObservacao());
                     ativoCheckBox.setSelected(matricula.getAtivo());
                 }
@@ -99,22 +98,22 @@ public class MatriculaFormPanel extends JPanel{
         idTxt.setEditable(false);
         adicionarComponente(idTxt, 0, 1);
 
-        rotulo = new JLabel("Nome Completo");
+        rotulo = new JLabel("Nome Completo *");
         adicionarComponente(rotulo, 1, 0);
         nomeTxt = new JTextField(30);
         adicionarComponente(nomeTxt, 1, 1);
 
-        rotulo = new JLabel("Anos Completo");
+        rotulo = new JLabel("Idade *");
         adicionarComponente(rotulo, 2, 0);
         anosCompletosTxt = new JTextField(30);
         adicionarComponente(anosCompletosTxt, 2, 1);
 
-        rotulo = new JLabel("E-mail");
+        rotulo = new JLabel("E-mail *");
         adicionarComponente(rotulo, 3, 0);
         emailTxt = new JTextField(30);
         adicionarComponente(emailTxt, 3, 1);
 
-        rotulo = new JLabel("Endereço");
+        rotulo = new JLabel("Endereço *");
         adicionarComponente(rotulo, 4, 0);
         enderecoTxt = new JTextField(30);
         adicionarComponente(enderecoTxt, 4, 1);
@@ -129,20 +128,20 @@ public class MatriculaFormPanel extends JPanel{
         telefoneTxt = new JTextField(30);
         adicionarComponente(telefoneTxt, 6, 1);
 
-        rotulo = new JLabel("Usuário");
+        rotulo = new JLabel("Usuário *");
         adicionarComponente(rotulo, 7, 0);
         userTxt = new JTextField(30);
         adicionarComponente(userTxt, 7, 1);
 
-        rotulo = new JLabel("Senha");
+        rotulo = new JLabel("Senha *");
         adicionarComponente(rotulo, 8, 0);
-        passwordTxt = new JTextField(30);
+        passwordTxt = new JPasswordField(30);
         adicionarComponente(passwordTxt, 8, 1);
 
         rotulo = new JLabel("Curso");
         adicionarComponente(rotulo, 9, 0);
 
-        String[] opcoesCursos = {"Curso 1", "Curso 2", "Curso 3"};
+        String[] opcoesCursos = {"Análise e Desenvolvimento de sistemas", "Desenvolvimento de Jogos", "Design Gráfico"};
         cursoComboBox = new JComboBox<>(opcoesCursos);
         adicionarComponente(cursoComboBox, 9, 1);
 
@@ -181,7 +180,7 @@ public class MatriculaFormPanel extends JPanel{
 		criarSalvarBtn(btnPanel);
 		criarCancelarBtn(btnPanel);
 
-		adicionarComponente(btnPanel, 18, 1, 2, 1);
+		adicionarComponente(btnPanel, 18, 1, 2, 3);
 	}
 
     private void criarSalvarBtn(JPanel panel) {

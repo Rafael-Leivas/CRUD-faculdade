@@ -99,6 +99,7 @@
 			});
 
 			JScrollPane scrollPane = new JScrollPane(tabela);
+			scrollPane.setPreferredSize(new Dimension(1500, 600));
 			panel.add(scrollPane);
 
 			add(panel, BorderLayout.CENTER);
