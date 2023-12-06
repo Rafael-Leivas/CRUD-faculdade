@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class AppFrame extends JFrame {
-	public static final String titulo = "TODO App";
+	public static final String titulo = "Sistema de Matriculas";
 	
 	private CardLayout layout;
 	private JPanel cardsPane;

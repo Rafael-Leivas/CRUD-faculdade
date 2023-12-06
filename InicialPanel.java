@@ -11,7 +11,7 @@ public class InicialPanel extends JPanel {
 	public InicialPanel(AppFrame appFrame) {
 		frame = appFrame;
 
-		tarefasBtn = new JButton("Tarefas");
+		tarefasBtn = new JButton("Matriculas");
 		tarefasBtn.addActionListener(new ActionListener() {
 
 			@Override
