@@ -56,18 +56,18 @@ public class MatriculaStore {
             conn = ConexaoBanco.getConexao();
 
             prepStmt = conn.prepareStatement(query);
-            prepStmt.setInt(1, matricula.getId());
-            prepStmt.setString(2, matricula.getNome());
-            prepStmt.setInt(3, matricula.getAnosCompletos());
-            prepStmt.setString(4, matricula.getEmail());
-            prepStmt.setString(5, matricula.getEndereco());
-            prepStmt.setString(6, matricula.getCep());
-            prepStmt.setString(7, matricula.getTelefone());
-            prepStmt.setString(8, matricula.getUsuario());
-            prepStmt.setString(9, matricula.getSenha());
-            prepStmt.setString(10, matricula.getCurso());
-            prepStmt.setString(11, matricula.getObservacao());
-            prepStmt.setBoolean(12, matricula.getAtivo());
+            prepStmt.setString(1, matricula.getNome());
+            prepStmt.setInt(2, matricula.getAnosCompletos());
+            prepStmt.setString(3, matricula.getEmail());
+            prepStmt.setString(4, matricula.getEndereco());
+            prepStmt.setString(5, matricula.getCep());
+            prepStmt.setString(6, matricula.getTelefone());
+            prepStmt.setString(7, matricula.getUsuario());
+            prepStmt.setString(8, matricula.getSenha());
+            prepStmt.setString(9, matricula.getCurso());
+            prepStmt.setString(10, matricula.getObservacao());
+            prepStmt.setBoolean(11, matricula.getAtivo());
+            prepStmt.setInt(12, matricula.getId());
             prepStmt.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class MatriculaStore {
         }
     }
 
-    public static ArrayList<Matricula> listar() {
+    public static List<Matricula> listar() {
         ArrayList<Matricula> matriculas = new ArrayList<>();
 
         String query = "SELECT id, nome, anosCompletos, email, endereco, cep, telefone, usuario, senha,curso,observacao,ativo FROM matricula";

@@ -34,8 +34,6 @@ public class MatriculaTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		String value = null;
-		int valor = 0;
-		boolean ativo = false;
 
 		if (rowIndex >= 0 && rowIndex < matriculas.size()) {
 			Matricula matricula = matriculas.get(rowIndex);
@@ -47,35 +45,35 @@ public class MatriculaTableModel extends AbstractTableModel {
 			case 1:
 				value = matricula.getNome();
 				break;
-			case 3:
-				valor = matricula.getAnosCompletos();
+			case 2:
+				value = String.valueOf(matricula.getAnosCompletos());
 				break;
-			case 4:
+			case 3:
 				value = matricula.getEmail();
 				break;
-			case 5:
+			case 4:
 				value = matricula.getEndereco();
 				break;
-			case 6:
+			case 5:
 				value = matricula.getCep();
 				break;
-			case 7:
+			case 6:
 				value = matricula.getTelefone();
 				break;
-			case 8:
+			case 7:
 				value = matricula.getUsuario();
 				break;
-			case 9:
+			case 8:
 				value = matricula.getSenha();
 				break;
-			case 10:
+			case 9:
 				value = matricula.getCurso();
 				break;
-			case 11:
+			case 10:
 				value = matricula.getObservacao();
 				break;
-			case 12:
-				ativo = matricula.getAtivo();
+			case 11:
+				value = String.valueOf(matricula.getAtivo());
 				break;
 			default:
 				System.err.printf("[ERRO] Índice de coluna inválido: %d\n", columnIndex);

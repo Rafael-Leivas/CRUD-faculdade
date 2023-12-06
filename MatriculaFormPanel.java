@@ -55,10 +55,29 @@ public class MatriculaFormPanel extends JPanel{
                 if (matricula == null) {
                     idTxt.setText("");
                     nomeTxt.setText("");
+                    anosCompletosTxt.setText("");
+                    emailTxt.setText("");
+                    enderecoTxt.setText("");
+                    cepTxt.setText("");
+                    telefoneTxt.setText("");
+                    userTxt.setText("");
+                    passwordTxt.setText("");
+                    cursoTxt.setText("");
                     observacaoTxt.setText("");
+                    ativoCheckBox.setSelected(false);
                 } else {
                     idTxt.setText(Integer.toString(matricula.getId()));
                     nomeTxt.setText(matricula.getNome());
+                    anosCompletosTxt.setText(Integer.toString(matricula.getAnosCompletos()));
+                    emailTxt.setText(matricula.getEmail());
+                    enderecoTxt.setText(matricula.getEndereco());
+                    cepTxt.setText(matricula.getCep());
+                    telefoneTxt.setText(matricula.getTelefone());
+                    userTxt.setText(matricula.getUsuario());
+                    passwordTxt.setText(matricula.getSenha());
+                    cursoTxt.setText(matricula.getCurso());
+                    observacaoTxt.setText(matricula.getObservacao());
+                    ativoCheckBox.setSelected(matricula.getAtivo());
                 }
             }
 
@@ -197,7 +216,7 @@ public class MatriculaFormPanel extends JPanel{
                     matricula.setCurso(getCursoSelecionado());
                     matricula.setObservacao(observacaoTxt.getText());
                     matricula.setAtivo(isAtivo());
-					MatriculaStore.inserir(matricula);
+					MatriculaStore.editar(matricula);
 				}
 
                 JOptionPane.showMessageDialog(MatriculaFormPanel.this, "Tarefa salva com sucesso!", AppFrame.titulo,
@@ -231,7 +250,5 @@ public class MatriculaFormPanel extends JPanel{
     public String getCursoSelecionado() {
     return (String) cursoComboBox.getSelectedItem();
 }
-
-
 
 }
