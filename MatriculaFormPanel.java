@@ -243,11 +243,11 @@ public class MatriculaFormPanel extends JPanel{
     }
 
     public boolean isAtivo() {
-    return ativoCheckBox.isSelected();
+        return ativoCheckBox.isSelected();
     }
 
     public String getCursoSelecionado() {
-    return (String) cursoComboBox.getSelectedItem();
-}
+        return (String) cursoComboBox.getSelectedItem();
+    }
 
 }

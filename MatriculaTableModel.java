@@ -5,7 +5,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class MatriculaTableModel extends AbstractTableModel {
 	private List<Matricula> matriculas = new ArrayList<Matricula>();
-	private String[] colunas = new String[] { "Id", "Nome", "AnosCompletos", "Email", "Endereco", "Cep", "Telefone", "Usuario", "Senha", "Curso", "Observacao", "Ativo" };
+	private String[] colunas = new String[] { "Id", "Nome", "AnosCompletos", "Email", "Endereco", "Cep", "Telefone", "Curso", "Observacao", "Ativo" };
 
 	public MatriculaTableModel(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
@@ -61,18 +61,12 @@ public class MatriculaTableModel extends AbstractTableModel {
 				value = matricula.getTelefone();
 				break;
 			case 7:
-				value = matricula.getUsuario();
-				break;
-			case 8:
-				value = matricula.getSenha();
-				break;
-			case 9:
 				value = matricula.getCurso();
 				break;
-			case 10:
+			case 8:
 				value = matricula.getObservacao();
 				break;
-			case 11:
+			case 9:
 				value = String.valueOf(matricula.getAtivo());
 				break;
 			default:
