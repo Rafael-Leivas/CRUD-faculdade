@@ -16,28 +16,28 @@ public class MatriculaStore {
         String query = "INSERT INTO matricula (nome, anosCompletos, email, endereco, cep, telefone, usuario, senha, curso, observacao, ativo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Connection conn = null;
-        PreparedStatement  stmt = null;
+        PreparedStatement  prepStmt = null;
         ResultSet rs = null;
 
         try{
             conn = ConexaoBanco.getConexao();
 
-            stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            prepStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            stmt.setString(1, matricula.getNome());
-            stmt.setInt(2, matricula.getAnosCompletos());
-            stmt.setString(3, matricula.getEmail());
-            stmt.setString(4, matricula.getEndereco());
-            stmt.setString(5, matricula.getCep());
-            stmt.setString(6, matricula.getTelefone());
-            stmt.setString(7, matricula.getUser());
-            stmt.setString(8, matricula.getPassword());
-            stmt.setString(9, matricula.getCurso());
-            stmt.setString(10, matricula.getObservacao());
-            stmt.setBoolean(11, matricula.getAtivo());
-            stmt.execute();
+            prepStmt.setString(1, matricula.getNome());
+            prepStmt.setInt(2, matricula.getAnosCompletos());
+            prepStmt.setString(3, matricula.getEmail());
+            prepStmt.setString(4, matricula.getEndereco());
+            prepStmt.setString(5, matricula.getCep());
+            prepStmt.setString(6, matricula.getTelefone());
+            prepStmt.setString(7, matricula.getUsuario());
+            prepStmt.setString(8, matricula.getSenha());
+            prepStmt.setString(9, matricula.getCurso());
+            prepStmt.setString(10, matricula.getObservacao());
+            prepStmt.setBoolean(11, matricula.getAtivo());
+            prepStmt.execute();
 
-            rs = stmt.getGeneratedKeys();
+            rs = prepStmt.getGeneratedKeys();
             while (rs.next()) {
                 matricula.setId(rs.getInt(1));
             }
@@ -50,42 +50,49 @@ public class MatriculaStore {
         String query = "UPDATE matricula SET nome = ?, anosCompletos = ?, email = ?, endereco = ?, cep = ?, telefone = ?, usuario = ?, senha = ?, curso = ?, observacao = ?, ativo = ? WHERE id = ?";
     
         Connection conn = null;
-        PreparedStatement  stmt = null;
+        PreparedStatement  prepStmt = null;
 
         try{
             conn = ConexaoBanco.getConexao();
 
-            stmt = conn.prepareStatement(query);
-            stmt.setInt(1, matricula.getId());
-            stmt.setString(2, matricula.getNome());
-            stmt.setInt(3, matricula.getAnosCompletos());
-            stmt.setString(4, matricula.getEmail());
-            stmt.setString(5, matricula.getEndereco());
-            stmt.setString(6, matricula.getCep());
-            stmt.setString(7, matricula.getTelefone());
-            stmt.setString(8, matricula.getUser());
-            stmt.setString(9, matricula.getPassword());
-            stmt.setString(10, matricula.getCurso());
-            stmt.setString(11, matricula.getObservacao());
-            stmt.setBoolean(12, matricula.getAtivo());
-            stmt.execute();
+            prepStmt = conn.prepareStatement(query);
+            prepStmt.setInt(1, matricula.getId());
+            prepStmt.setString(2, matricula.getNome());
+            prepStmt.setInt(3, matricula.getAnosCompletos());
+            prepStmt.setString(4, matricula.getEmail());
+            prepStmt.setString(5, matricula.getEndereco());
+            prepStmt.setString(6, matricula.getCep());
+            prepStmt.setString(7, matricula.getTelefone());
+            prepStmt.setString(8, matricula.getUsuario());
+            prepStmt.setString(9, matricula.getSenha());
+            prepStmt.setString(10, matricula.getCurso());
+            prepStmt.setString(11, matricula.getObservacao());
+            prepStmt.setBoolean(12, matricula.getAtivo());
+            prepStmt.execute();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        } finally {
+			try {
+				if (prepStmt != null)
+					prepStmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public static void remover(Matricula matricula) {
         String query = "DELETE FROM matricula WHERE id = ?";
 
         Connection conn = null;
-        PreparedStatement  stmt = null;
+        PreparedStatement  prepStmt = null;
 
         try{
             conn = ConexaoBanco.getConexao();
 
-            stmt = conn.prepareStatement(query);
-            stmt.setInt(1, matricula.getId());
-            stmt.execute();
+            prepStmt = conn.prepareStatement(query);
+            prepStmt.setInt(1, matricula.getId());
+            prepStmt.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,15 +104,15 @@ public class MatriculaStore {
         String query = "SELECT id, nome, anosCompletos, email, endereco, cep, telefone, usuario, senha,curso,observacao,ativo FROM matricula";
 
         Connection conn = null;
-        Statement stmt = null;
+        Statement prepStmt = null;
         ResultSet rs = null;
 
         try{
             //TODO: Conectar
 
             conn = ConexaoBanco.getConexao();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(query);
+            prepStmt = conn.createStatement();
+            rs = prepStmt.executeQuery(query);
 
             while (rs.next()) {
                 Matricula matricula = new Matricula();
@@ -116,8 +123,8 @@ public class MatriculaStore {
                 matricula.setEndereco(rs.getString("endereco"));
                 matricula.setCep(rs.getString("cep"));
                 matricula.setTelefone(rs.getString("telefone"));
-                matricula.setUser(rs.getString("usuario"));
-                matricula.setPassword(rs.getString("senha"));
+                matricula.setUsuario(rs.getString("usuario"));
+                matricula.setSenha(rs.getString("senha"));
                 matricula.setCurso(rs.getString("curso"));
                 matricula.setObservacao(rs.getString("observacao"));
                 matricula.setAtivo(rs.getBoolean("ativo"));

@@ -63,10 +63,10 @@ public class MatriculaTableModel extends AbstractTableModel {
 				value = matricula.getTelefone();
 				break;
 			case 8:
-				value = matricula.getUser();
+				value = matricula.getUsuario();
 				break;
 			case 9:
-				value = matricula.getPassword();
+				value = matricula.getSenha();
 				break;
 			case 10:
 				value = matricula.getCurso();

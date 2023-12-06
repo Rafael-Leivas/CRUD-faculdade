@@ -9,8 +9,8 @@ public class Matricula {
     private String endereco;
     private String cep;
     private String telefone;
-    private String user;
-    private String password;
+    private String usuario;
+    private String senha;
     private String curso;
     private String observacao;
     private boolean ativo;
@@ -64,18 +64,18 @@ public class Matricula {
         this.telefone = telefone;
     }
 
-    public String getUser() {
-        return user;
+    public String getUsuario() {
+        return usuario;
     }
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getCurso() {
@@ -101,7 +101,7 @@ public class Matricula {
 
     @Override
 	public String toString() {
-		return String.format("ID:%d\n Nome:%s\n Seu ano:%d\n email:%s\n Endereço:%s\n CEP:%s\n Telefone:%s\n Usuário:%s\n Senha:%s\n Curso:%s\n Observação:%s\n Ativo:", id, nome, anosCompletos, email, endereco, cep, telefone, user, password, curso, observacao, ativo);
+		return String.format("ID:%d\n Nome:%s\n Seu ano:%d\n email:%s\n Endereço:%s\n CEP:%s\n Telefone:%s\n Usuário:%s\n Senha:%s\n Curso:%s\n Observação:%s\n Ativo:", id, nome, anosCompletos, email, endereco, cep, telefone, usuario, senha, curso, observacao, ativo);
 	}
 
     @Override

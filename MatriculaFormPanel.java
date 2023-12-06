@@ -27,6 +27,15 @@ public class MatriculaFormPanel extends JPanel{
 
     private JTextField idTxt;
     private JTextField nomeTxt;
+    private JTextField anosCompletosTxt;
+    private JTextField emailTxt;
+    private JTextField enderecoTxt;
+    private JTextField cepTxt;
+    private JTextField telefoneTxt;
+    private JTextField userTxt;
+    private JTextField passwordTxt;
+    private JComboBox<String> cursoComboBox;
+    private JTextField cursoTxt;
     private JTextArea observacaoTxt;
     private JCheckBox ativoCheckBox;
 
@@ -78,38 +87,38 @@ public class MatriculaFormPanel extends JPanel{
 
         rotulo = new JLabel("Anos Completo");
         adicionarComponente(rotulo, 2, 0);
-        nomeTxt = new JTextField(30);
-        adicionarComponente(nomeTxt, 2, 1);
+        anosCompletosTxt = new JTextField(30);
+        adicionarComponente(anosCompletosTxt, 2, 1);
 
         rotulo = new JLabel("E-mail");
         adicionarComponente(rotulo, 3, 0);
-        nomeTxt = new JTextField(30);
-        adicionarComponente(nomeTxt, 3, 1);
+        emailTxt = new JTextField(30);
+        adicionarComponente(emailTxt, 3, 1);
 
         rotulo = new JLabel("Endereço");
         adicionarComponente(rotulo, 4, 0);
-        nomeTxt = new JTextField(30);
-        adicionarComponente(nomeTxt, 4, 1);
+        enderecoTxt = new JTextField(30);
+        adicionarComponente(enderecoTxt, 4, 1);
 
         rotulo = new JLabel("CEP");
         adicionarComponente(rotulo, 5, 0);
-        nomeTxt = new JTextField(30);
-        adicionarComponente(nomeTxt, 5, 1);
+        cepTxt = new JTextField(30);
+        adicionarComponente(cepTxt, 5, 1);
 
         rotulo = new JLabel("Telefone");
         adicionarComponente(rotulo, 6, 0);
-        nomeTxt = new JTextField(30);
-        adicionarComponente(nomeTxt, 6, 1);
+        telefoneTxt = new JTextField(30);
+        adicionarComponente(telefoneTxt, 6, 1);
 
         rotulo = new JLabel("Usuário");
         adicionarComponente(rotulo, 7, 0);
-        nomeTxt = new JTextField(30);
-        adicionarComponente(nomeTxt, 7, 1);
+        userTxt = new JTextField(30);
+        adicionarComponente(userTxt, 7, 1);
 
         rotulo = new JLabel("Senha");
         adicionarComponente(rotulo, 8, 0);
-        nomeTxt = new JTextField(30);
-        adicionarComponente(nomeTxt, 8, 1);
+        passwordTxt = new JTextField(30);
+        adicionarComponente(passwordTxt, 8, 1);
 
         rotulo = new JLabel("Curso");
         adicionarComponente(rotulo, 9, 0);
@@ -129,7 +138,7 @@ public class MatriculaFormPanel extends JPanel{
         ativoCheckBox = new JCheckBox();
         adicionarComponente(ativoCheckBox, 16, 1);
 
-		adicionarBotoes();
+		criarBotoes();
     }
 
     private void adicionarComponente(JComponent componente, int linha, int coluna, int largura, int altura) {
@@ -145,25 +154,70 @@ public class MatriculaFormPanel extends JPanel{
         add(componente);
     }
 
-	private void adicionarBotoes() {
+    private void criarBotoes() {
+		JPanel btnPanel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) btnPanel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+
+		criarSalvarBtn(btnPanel);
+		criarCancelarBtn(btnPanel);
+
+		adicionarComponente(btnPanel, 18, 1, 2, 1);
+	}
+
+    private void criarSalvarBtn(JPanel panel) {
         JButton salvarButton = new JButton("Salvar");
         salvarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+				if (matricula == null) {
+					matricula = new Matricula();
+					matricula.setNome(nomeTxt.getText());
+                    matricula.setAnosCompletos(Integer.parseInt(anosCompletosTxt.getText()));
+                    matricula.setEmail(emailTxt.getText());
+                    matricula.setEndereco(enderecoTxt.getText());
+                    matricula.setCep(cepTxt.getText());
+                    matricula.setTelefone(telefoneTxt.getText());
+                    matricula.setUsuario(userTxt.getText());
+                    matricula.setSenha(passwordTxt.getText());
+                    matricula.setCurso(getCursoSelecionado());
+                    matricula.setObservacao(observacaoTxt.getText());
+                    matricula.setAtivo(isAtivo());
+					MatriculaStore.inserir(matricula);
+				} else {
+					matricula.setId(Integer.parseInt(idTxt.getText()));
+					matricula.setNome(nomeTxt.getText());
+                    matricula.setAnosCompletos(Integer.parseInt(anosCompletosTxt.getText()));
+                    matricula.setEmail(emailTxt.getText());
+                    matricula.setEndereco(enderecoTxt.getText());
+                    matricula.setCep(cepTxt.getText());
+                    matricula.setTelefone(telefoneTxt.getText());
+                    matricula.setUsuario(userTxt.getText());
+                    matricula.setSenha(passwordTxt.getText());
+                    matricula.setCurso(getCursoSelecionado());
+                    matricula.setObservacao(observacaoTxt.getText());
+                    matricula.setAtivo(isAtivo());
+					MatriculaStore.inserir(matricula);
+				}
 
-                JOptionPane.showMessageDialog(frame, "Dados salvos com sucesso!");
-            }
+                JOptionPane.showMessageDialog(MatriculaFormPanel.this, "Tarefa salva com sucesso!", AppFrame.titulo,
+						JOptionPane.INFORMATION_MESSAGE);
+                
+                frame.mostrarListaMatriculas(); 
+            }   
         });
-        adicionarComponente(salvarButton, 17, 0);
+		panel.add(salvarButton);
+    }
 
-        JButton cancelarButton = new JButton("Cancelar");
-        cancelarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "Edição cancelada.");
-            }
-        });
-        adicionarComponente(cancelarButton, 17, 1);
+    public void criarCancelarBtn(JPanel panel){
+        JButton cancelarBtn = new JButton("Cancelar");
+		cancelarBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.mostrarListaMatriculas();
+			}
+		});
+		panel.add(cancelarBtn);
     }
 
     private void adicionarComponente(JComponent componente, int linha, int coluna) {
@@ -173,8 +227,6 @@ public class MatriculaFormPanel extends JPanel{
     public boolean isAtivo() {
     return ativoCheckBox.isSelected();
     }
-
-    private JComboBox<String> cursoComboBox;
 
     public String getCursoSelecionado() {
     return (String) cursoComboBox.getSelectedItem();
