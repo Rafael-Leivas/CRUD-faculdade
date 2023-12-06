@@ -13,15 +13,15 @@
 	import javax.swing.event.ListSelectionEvent;
 	import javax.swing.event.ListSelectionListener;
 
-	public class MatriculaListPanel extends JPanel {
+	public class PainelMatriculas extends JPanel {
 		private AppFrame frame;
 		private JButton novaMatriculaBtn;
 		private JButton editarMatriculaBtn;
 		private JButton removerMatriculaBtn;
 		private JTable tabela;
-		private MatriculaTableModel tableModel;
+		private TelaMatriculasModelo tableModel;
 
-		public MatriculaListPanel(AppFrame appFrame) {
+		public PainelMatriculas(AppFrame appFrame) {
 			frame = appFrame;
 
 			setLayout(new BorderLayout(10, 10));
@@ -31,7 +31,7 @@
 		}
 
 		public void recarregar() {
-			tableModel.carregar(MatriculaStore.listar());
+			tableModel.carregar(BancoMatricula.listar());
 		}
 
 		private void criarComandosPanel() {
@@ -64,10 +64,10 @@
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					Matricula matricula = tableModel.getMatricula(tabela.getSelectedRow());
-					int resposta = JOptionPane.showConfirmDialog(MatriculaListPanel.this, "Deseja realmente remover?",
+					int resposta = JOptionPane.showConfirmDialog(PainelMatriculas.this, "Deseja realmente remover?",
 							AppFrame.titulo, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (resposta == JOptionPane.YES_OPTION) {
-						MatriculaStore.remover(matricula);
+						BancoMatricula.remover(matricula);
 						tableModel.remover(matricula);
 					}
 				}
@@ -82,7 +82,7 @@
 		private void criarTabelaPanel() {
 			JPanel panel = new JPanel();
 
-			tableModel = new MatriculaTableModel(MatriculaStore.listar());
+			tableModel = new TelaMatriculasModelo(BancoMatricula.listar());
 			tabela = new JTable(tableModel);
 			tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -114,4 +114,4 @@
 			editarMatriculaBtn.setEnabled(false);
 			removerMatriculaBtn.setEnabled(false);
 		}
-	} // fim da classe TarefaListPanel
+	}

@@ -4,14 +4,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class AppFrame extends JFrame {
-	public static final String titulo = "Sistema de Matriculas";
+	public static final String titulo = "Sistema de Matricula";
 	
 	private CardLayout layout;
 	private JPanel cardsPane;
 
-	private InicialPanel inicialPanel;
-	private MatriculaListPanel matriculaListPanel;
-	private MatriculaFormPanel matriculaFormPanel;
+	private PainelInicial painelInicial;
+	private PainelMatriculas painelMatriculas;
+	private TelaCadastroMatricula telaCadastroMatricula;
 
 	public AppFrame() {
 		super(titulo);
@@ -34,23 +34,23 @@ public class AppFrame extends JFrame {
 	}
 
 	public void mostrarListaMatriculas() {
-		matriculaListPanel.recarregar();
-		layout.show(cardsPane, MatriculaListPanel.class.getName());
+		painelMatriculas.recarregar();
+		layout.show(cardsPane, PainelMatriculas.class.getName());
 	}
 	
 	public void mostrarFormMatriculas(Matricula matricula) {
-		matriculaFormPanel.setMatricula(matricula);
-		layout.show(cardsPane, MatriculaFormPanel.class.getName());
+		telaCadastroMatricula.setMatricula(matricula);
+		layout.show(cardsPane, TelaCadastroMatricula.class.getName());
 	}
 
 	private void criarCards() {
-		inicialPanel = new InicialPanel(this);
-		cardsPane.add(inicialPanel, InicialPanel.class.getName());
+		painelInicial = new PainelInicial(this);
+		cardsPane.add(painelInicial, PainelInicial.class.getName());
 
-		matriculaListPanel = new MatriculaListPanel(this);
-		cardsPane.add(matriculaListPanel, MatriculaListPanel.class.getName());
+		painelMatriculas = new PainelMatriculas(this);
+		cardsPane.add(painelMatriculas, PainelMatriculas.class.getName());
 
-		matriculaFormPanel = new MatriculaFormPanel(this);
-		cardsPane.add(matriculaFormPanel, MatriculaFormPanel.class.getName());
+		telaCadastroMatricula = new TelaCadastroMatricula(this);
+		cardsPane.add(telaCadastroMatricula, TelaCadastroMatricula.class.getName());
 	}
 } // fim da classe AppFrame

@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.swing.plaf.nimbus.State;
 
-public class MatriculaStore {
+public class BancoMatricula {
 
     //Comando para rodar
     //java -cp ".;./mysql-connector-j-8.2.0.jar" TodoApp

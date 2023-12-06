@@ -3,11 +3,11 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-public class MatriculaTableModel extends AbstractTableModel {
+public class TelaMatriculasModelo extends AbstractTableModel {
 	private List<Matricula> matriculas = new ArrayList<Matricula>();
 	private String[] colunas = new String[] { "Id", "Nome", "AnosCompletos", "Email", "Endereco", "Cep", "Telefone", "Curso", "Observacao", "Ativo" };
 
-	public MatriculaTableModel(List<Matricula> matriculas) {
+	public TelaMatriculasModelo(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
 	}
 
@@ -97,4 +97,4 @@ public class MatriculaTableModel extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 
-} // fim da classe TarefaTabelaModel
+}

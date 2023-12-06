@@ -4,11 +4,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class InicialPanel extends JPanel {
+public class PainelInicial extends JPanel {
 	private AppFrame frame;
 	private JButton tarefasBtn;
 
-	public InicialPanel(AppFrame appFrame) {
+	public PainelInicial(AppFrame appFrame) {
 		frame = appFrame;
 
 		tarefasBtn = new JButton("Matriculas");
@@ -22,4 +22,4 @@ public class InicialPanel extends JPanel {
 		add(tarefasBtn);
 	}
 
-} // fim da class InicialPanel
+}

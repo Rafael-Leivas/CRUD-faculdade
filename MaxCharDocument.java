@@ -22,4 +22,4 @@ public class MaxCharDocument extends PlainDocument {
 			}
 		}
 	}
-} // fim da classe MaxCharDocument
+}

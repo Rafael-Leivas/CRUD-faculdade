@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class MatriculaFormPanel extends JPanel{
+public class TelaCadastroMatricula extends JPanel{
     private static final Insets FIELD_INSETS = new Insets(5, 10, 0, 0);
 
     private AppFrame frame;
@@ -43,7 +43,7 @@ public class MatriculaFormPanel extends JPanel{
     private GridBagLayout layout;
     private GridBagConstraints constraints;
 
-    public MatriculaFormPanel(AppFrame appFrame){
+    public TelaCadastroMatricula(AppFrame appFrame){
         frame = appFrame;
 
         layout = new GridBagLayout();
@@ -98,22 +98,22 @@ public class MatriculaFormPanel extends JPanel{
         idTxt.setEditable(false);
         adicionarComponente(idTxt, 0, 1);
 
-        rotulo = new JLabel("Nome Completo *");
+        rotulo = new JLabel("Nome Completo (Obrigatório)");
         adicionarComponente(rotulo, 1, 0);
         nomeTxt = new JTextField(30);
         adicionarComponente(nomeTxt, 1, 1);
 
-        rotulo = new JLabel("Idade *");
+        rotulo = new JLabel("Idade (Obrigatório)");
         adicionarComponente(rotulo, 2, 0);
         anosCompletosTxt = new JTextField(30);
         adicionarComponente(anosCompletosTxt, 2, 1);
 
-        rotulo = new JLabel("E-mail *");
+        rotulo = new JLabel("E-mail (Obrigatório)");
         adicionarComponente(rotulo, 3, 0);
         emailTxt = new JTextField(30);
         adicionarComponente(emailTxt, 3, 1);
 
-        rotulo = new JLabel("Endereço *");
+        rotulo = new JLabel("Endereço (Obrigatório)");
         adicionarComponente(rotulo, 4, 0);
         enderecoTxt = new JTextField(30);
         adicionarComponente(enderecoTxt, 4, 1);
@@ -128,12 +128,12 @@ public class MatriculaFormPanel extends JPanel{
         telefoneTxt = new JTextField(30);
         adicionarComponente(telefoneTxt, 6, 1);
 
-        rotulo = new JLabel("Usuário *");
+        rotulo = new JLabel("Usuário (Obrigatório)");
         adicionarComponente(rotulo, 7, 0);
         userTxt = new JTextField(30);
         adicionarComponente(userTxt, 7, 1);
 
-        rotulo = new JLabel("Senha *");
+        rotulo = new JLabel("Senha (Obrigatório)");
         adicionarComponente(rotulo, 8, 0);
         passwordTxt = new JPasswordField(30);
         adicionarComponente(passwordTxt, 8, 1);
@@ -188,40 +188,57 @@ public class MatriculaFormPanel extends JPanel{
         salvarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-				if (matricula == null) {
-					matricula = new Matricula();
-					matricula.setNome(nomeTxt.getText());
-                    matricula.setAnosCompletos(Integer.parseInt(anosCompletosTxt.getText()));
-                    matricula.setEmail(emailTxt.getText());
-                    matricula.setEndereco(enderecoTxt.getText());
-                    matricula.setCep(cepTxt.getText());
-                    matricula.setTelefone(telefoneTxt.getText());
-                    matricula.setUsuario(userTxt.getText());
-                    matricula.setSenha(passwordTxt.getText());
-                    matricula.setCurso(getCursoSelecionado());
-                    matricula.setObservacao(observacaoTxt.getText());
-                    matricula.setAtivo(isAtivo());
-					MatriculaStore.inserir(matricula);
-				} else {
-					matricula.setId(Integer.parseInt(idTxt.getText()));
-					matricula.setNome(nomeTxt.getText());
-                    matricula.setAnosCompletos(Integer.parseInt(anosCompletosTxt.getText()));
-                    matricula.setEmail(emailTxt.getText());
-                    matricula.setEndereco(enderecoTxt.getText());
-                    matricula.setCep(cepTxt.getText());
-                    matricula.setTelefone(telefoneTxt.getText());
-                    matricula.setUsuario(userTxt.getText());
-                    matricula.setSenha(passwordTxt.getText());
-                    matricula.setCurso(getCursoSelecionado());
-                    matricula.setObservacao(observacaoTxt.getText());
-                    matricula.setAtivo(isAtivo());
-					MatriculaStore.editar(matricula);
-				}
+                if (verificarCamposObrigatorios()){
+                    if (matricula == null) {
+                        matricula = new Matricula();
+                        matricula.setNome(nomeTxt.getText());
+                        try{
+                            matricula.setAnosCompletos(Integer.parseInt(anosCompletosTxt.getText()));
+                        }catch(NumberFormatException ex){
+                            JOptionPane.showMessageDialog(TelaCadastroMatricula.this, "Insira um valor inteiro válido para a idade!",
+                            AppFrame.titulo, JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        matricula.setEmail(emailTxt.getText());
+                        matricula.setEndereco(enderecoTxt.getText());
+                        matricula.setCep(cepTxt.getText());
+                        matricula.setTelefone(telefoneTxt.getText());
+                        matricula.setUsuario(userTxt.getText());
+                        matricula.setSenha(passwordTxt.getText());
+                        matricula.setCurso(getCursoSelecionado());
+                        matricula.setObservacao(observacaoTxt.getText());
+                        matricula.setAtivo(isAtivo());
+                        BancoMatricula.inserir(matricula);
+                    } else {
+                        matricula.setId(Integer.parseInt(idTxt.getText()));
+                        matricula.setNome(nomeTxt.getText());
+                        try{
+                            matricula.setAnosCompletos(Integer.parseInt(anosCompletosTxt.getText()));
+                        }catch(NumberFormatException ex){
+                            JOptionPane.showMessageDialog(TelaCadastroMatricula.this, "Insira um valor inteiro válido para a idade!",
+                            AppFrame.titulo, JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        matricula.setEmail(emailTxt.getText());
+                        matricula.setEndereco(enderecoTxt.getText());
+                        matricula.setCep(cepTxt.getText());
+                        matricula.setTelefone(telefoneTxt.getText());
+                        matricula.setUsuario(userTxt.getText());
+                        matricula.setSenha(passwordTxt.getText());
+                        matricula.setCurso(getCursoSelecionado());
+                        matricula.setObservacao(observacaoTxt.getText());
+                        matricula.setAtivo(isAtivo());
+                        BancoMatricula.editar(matricula);
+                    }
 
-                JOptionPane.showMessageDialog(MatriculaFormPanel.this, "Tarefa salva com sucesso!", AppFrame.titulo,
-						JOptionPane.INFORMATION_MESSAGE);
-                
-                frame.mostrarListaMatriculas(); 
+                    JOptionPane.showMessageDialog(TelaCadastroMatricula.this, "Tarefa salva com sucesso!", AppFrame.titulo,
+                            JOptionPane.INFORMATION_MESSAGE);
+                    
+                    frame.mostrarListaMatriculas(); 
+                }else {
+                    JOptionPane.showMessageDialog(TelaCadastroMatricula.this, "Preencha todos os campos obrigatórios!",
+                            AppFrame.titulo, JOptionPane.ERROR_MESSAGE);
+                }
             }   
         });
 		panel.add(salvarButton);
@@ -248,6 +265,16 @@ public class MatriculaFormPanel extends JPanel{
 
     public String getCursoSelecionado() {
         return (String) cursoComboBox.getSelectedItem();
+    }
+    
+    private boolean verificarCamposObrigatorios() {
+        // Verifica se os campos de texto obrigatórios têm pelo menos um caractere
+        return !nomeTxt.getText().isEmpty() &&
+                !anosCompletosTxt.getText().isEmpty() &&
+                !emailTxt.getText().isEmpty() &&
+                !enderecoTxt.getText().isEmpty() &&
+                !userTxt.getText().isEmpty() &&
+                !passwordTxt.getText().isEmpty();
     }
 
 }
