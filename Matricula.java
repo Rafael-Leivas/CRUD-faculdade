@@ -95,7 +95,6 @@ public class Matricula {
     public boolean getAtivo() {
         return ativo;
     }
-
     public void setAtivo(boolean ativo) {
         this.ativo= ativo;
     }
